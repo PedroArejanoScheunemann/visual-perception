@@ -1,0 +1,90 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 20
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build/${presetName}"
+    },
+    {
+      "name": "unit",
+      "inherits": "base",
+      "cacheVariables": {
+        "VP_BUILD_UNIT_TESTS": "ON"
+      }
+    },
+    {
+      "name": "integration",
+      "inherits": "base",
+      "cacheVariables": {
+        "VP_BUILD_INTEGRATION_TESTS": "ON"
+      }
+    },
+    {
+      "name": "system",
+      "inherits": "base",
+      "cacheVariables": {
+        "VP_BUILD_SYSTEM_TESTS": "ON"
+      }
+    },
+    {
+      "name": "all",
+      "inherits": "base",
+      "cacheVariables": {
+        "VP_BUILD_ALL_TESTS": "ON"
+      }
+    },
+    {
+      "name": "release",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "unit",
+      "configurePreset": "unit"
+    },
+    {
+      "name": "integration",
+      "configurePreset": "integration"
+    },
+    {
+      "name": "system",
+      "configurePreset": "system"
+    },
+    {
+      "name": "all",
+      "configurePreset": "all"
+    },
+    {
+      "name": "release",
+      "configurePreset": "release"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "unit",
+      "configurePreset": "unit"
+    },
+    {
+      "name": "integration",
+      "configurePreset": "integration"
+    },
+    {
+      "name": "system",
+      "configurePreset": "system"
+    },
+    {
+      "name": "all",
+      "configurePreset": "all"
+    }
+  ]
+}

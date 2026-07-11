@@ -1,0 +1,6 @@
+{
+    "name": "Tracking Bracelet",
+    "build": {
+        "dockerfile": "VSDockerfile"
+    }
+}

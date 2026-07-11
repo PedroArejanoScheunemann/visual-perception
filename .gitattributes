@@ -1,0 +1,23 @@
+* text=auto eol=lf
+
+*.c text
+*.h text
+*.cpp text
+*.hpp text
+
+*.cmake text
+CMakeLists.txt text
+
+*.py text
+
+*.md text
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.step binary
+*.stp binary
+*.stl binary
+*.zip binary
