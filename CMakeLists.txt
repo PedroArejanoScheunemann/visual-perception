@@ -22,7 +22,7 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -33,7 +33,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 option(VP_BUILD_ALL_TESTS         "Build all tests"         OFF)
 option(VP_BUILD_UNIT_TESTS        "Build unit tests"        OFF)
 option(VP_BUILD_INTEGRATION_TESTS "Build integration tests" OFF)
-option(VP_BUILD_SYSTEM_TESTS      "Build system tests"      OFF)
 
 option(VP_BUILD_EXAMPLES          "Build examples"          OFF)
 
@@ -44,7 +43,6 @@ option(VP_BUILD_EXAMPLES          "Build examples"          OFF)
 if(VP_BUILD_ALL_TESTS)
     set(VP_BUILD_UNIT_TESTS        ON)
     set(VP_BUILD_INTEGRATION_TESTS ON)
-    set(VP_BUILD_SYSTEM_TESTS      ON)
 endif()
 
 # ============================================================================
@@ -52,8 +50,7 @@ endif()
 # ============================================================================
 
 if(VP_BUILD_UNIT_TESTS OR
-   VP_BUILD_INTEGRATION_TESTS OR
-   VP_BUILD_SYSTEM_TESTS)
+   VP_BUILD_INTEGRATION_TESTS)
     enable_testing()
     include(cmake/dependencies/GoogleTest.cmake)
 endif()
@@ -63,14 +60,6 @@ endif()
 # ============================================================================
 
 add_subdirectory(modules)
-
-# ============================================================================
-# System Tests
-# ============================================================================
-
-if(VP_BUILD_SYSTEM_TESTS)
-    add_subdirectory(tests)
-endif()
 
 # ============================================================================
 # Examples

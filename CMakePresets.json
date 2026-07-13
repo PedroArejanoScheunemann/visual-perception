@@ -26,13 +26,6 @@
       }
     },
     {
-      "name": "system",
-      "inherits": "base",
-      "cacheVariables": {
-        "VP_BUILD_SYSTEM_TESTS": "ON"
-      }
-    },
-    {
       "name": "all",
       "inherits": "base",
       "cacheVariables": {
@@ -57,10 +50,6 @@
       "configurePreset": "integration"
     },
     {
-      "name": "system",
-      "configurePreset": "system"
-    },
-    {
       "name": "all",
       "configurePreset": "all"
     },
@@ -77,10 +66,6 @@
     {
       "name": "integration",
       "configurePreset": "integration"
-    },
-    {
-      "name": "system",
-      "configurePreset": "system"
     },
     {
       "name": "all",

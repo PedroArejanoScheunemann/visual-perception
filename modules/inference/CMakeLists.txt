@@ -1,21 +1,20 @@
-add_library(vp_inference)
+add_subdirectory(backend)
+add_subdirectory(models)
 
-target_sources(
-    vp_inference
-    PRIVATE
-        src/inference.c
+add_library(vp_inference INTERFACE)
+
+add_library(Vision::Inference ALIAS vp_inference)
+
+target_include_directories(vp_inference
+    INTERFACE
+        ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-target_include_directories(
-    vp_inference
-    PUBLIC
-        include
-)
-
-target_link_libraries(
-    vp_inference
-    PUBLIC
-        vp_common
+target_link_libraries(vp_inference
+    INTERFACE
+        Vision::Inference::Backend
+        Vision::Inference::Models
+        Vision::Inference::Engine
 )
 
 if(VP_BUILD_UNIT_TESTS)

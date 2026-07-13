@@ -1,16 +1,9 @@
-add_executable(vp_inference_tests)
+add_executable(vp_inference_tests stub_test.cpp)
 
-target_sources(
-    vp_inference_tests
+target_link_libraries(vp_inference_tests
     PRIVATE
-        stub_test.cpp
-)
-
-target_link_libraries(
-    vp_inference_tests
-    PRIVATE
-        vp_inference
         GTest::gtest_main
+        Vision::Inference
 )
 
 include(GoogleTest)

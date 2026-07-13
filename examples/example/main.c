@@ -1,5 +1,5 @@
 #include "pipeline.h"
 
-void example_init(void)
+void main(void)
 {
 }

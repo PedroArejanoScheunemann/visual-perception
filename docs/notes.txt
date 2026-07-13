@@ -1,0 +1,13 @@
+Qual é o objetivo do Visual Perception?
+
+Não é ser um framework de IA.
+
+Não é ser um ROS.
+
+Não é ser um OpenCV.
+
+O objetivo é:
+
+Executar um pipeline de visão computacional em tempo real, com a menor latência possível.
+
+Isso muda completamente a arquitetura.

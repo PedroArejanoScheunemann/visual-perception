@@ -1,7 +1,19 @@
 #include <gtest/gtest.h>
-#include "pipeline.h"
 
-TEST(IntegrationTest, Stub)
+#include "engine.hpp"
+
+namespace vp
 {
-    EXPECT_TRUE(true);
+
+TEST(EngineTest, ProcessFrame)
+{
+    Frame frame;
+
+    Engine engine;
+
+    engine.Process(frame);
+
+    SUCCEED();
 }
+
+} // namespace vp
