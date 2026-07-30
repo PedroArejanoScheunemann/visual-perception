@@ -1,6 +1,6 @@
-add_subdirectory(inference)
+add_subdirectory(types)
+add_subdirectory(perception)
+add_subdirectory(backend)
+add_subdirectory(models)
 add_subdirectory(engine)
-
-if(VP_BUILD_INTEGRATION_TESTS)
-    add_subdirectory(tests)
-endif()
+add_subdirectory(tests)

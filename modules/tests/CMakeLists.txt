@@ -1,11 +1,7 @@
-add_executable(vp_integration_tests stub_test.cpp)
+if(VP_BUILD_COMPONENT_TESTS)
+    add_subdirectory(component)
+endif()
 
-target_link_libraries(vp_integration_tests
-    PRIVATE
-        GTest::gtest_main
-        Vision::Inference
-)
-
-include(GoogleTest)
-
-gtest_discover_tests(vp_integration_tests)
+if(VP_BUILD_SYSTEM_TESTS)
+    add_subdirectory(system)
+endif()

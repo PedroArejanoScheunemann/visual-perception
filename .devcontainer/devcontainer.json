@@ -1,6 +1,7 @@
 {
     "name": "Visual Perception",
     "build": {
-        "dockerfile": "VSDockerfile"
+        "dockerfile": "VSDockerfile",
+        "context": ".."
     }
 }

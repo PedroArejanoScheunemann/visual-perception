@@ -1,1 +1,18 @@
 FROM mcr.microsoft.com/devcontainers/cpp:1-ubuntu-24.04
+
+COPY tools/dependencies.txt /tmp/dependencies.txt
+
+RUN apt-get update && \
+    apt-get install -y \
+        python3-venv \
+        libgl1 \
+        libxcb1 \
+        libopencv-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN python3 -m venv /opt/venv && \
+    /opt/venv/bin/python -m pip install --upgrade pip && \
+    /opt/venv/bin/pip install --no-cache-dir -r /tmp/dependencies.txt && \
+    rm /tmp/dependencies.txt
+
+ENV PATH="/opt/venv/bin:${PATH}"

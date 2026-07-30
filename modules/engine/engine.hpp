@@ -4,17 +4,19 @@
 #include <vector>
 
 #include "frame.hpp"
-#include "inference_model.hpp"
+#include "model.hpp"
+#include "descriptor.hpp"
+#include "object_detections.hpp"
+#include "perception_state.hpp"
 
 namespace vp
 {
 
 /**
- * @brief Orchestrates the execution of inference models.
+ * @brief Orchestrates inference models.
  *
- * The engine manages a collection of inference models and executes them for
- * each input frame. It is agnostic to the tasks performed by the models and to
- * the types of outputs they produce.
+ * The engine owns all inference models, executes them for each input frame,
+ * and exposes the current perception results.
  */
 class Engine
 {
@@ -28,37 +30,53 @@ public:
     /**
      * @brief Destroys the inference engine.
      */
-    virtual ~Engine() = default;
+    ~Engine() = default;
 
     /**
-     * @brief Adds an inference model to the engine.
+     * @brief Creates and adds an inference model.
      *
-     * @param model Inference model.
-     */
-    void AddModel(std::shared_ptr<InferenceModel> model);
-
-    /**
-     * @brief Removes an inference model from the engine.
+     * @param descriptor Model descriptor.
      *
-     * @param model Inference model.
+     * @return Reference to the created model.
      */
-    void RemoveModel(std::shared_ptr<InferenceModel> model);
+    Model& AddModel(const ModelDescriptor& descriptor);
 
     /**
-     * @brief Removes all inference models.
+     * @brief Removes a model.
+     *
+     * @param model Model to remove.
+     */
+    void RemoveModel(Model& model);
+
+    /**
+     * @brief Removes all registered models.
      */
     void ClearModels();
 
     /**
-     * @brief Executes all registered inference models.
+     * @brief Executes all registered models.
      *
      * @param frame Input frame.
      */
     void Process(const Frame& frame);
 
+    /**
+     * @brief Returns the detected objects.
+     *
+     * @return Object detections.
+     */
+    const ObjectDetections& Detections() const;
+
 private:
 
-    std::vector<std::shared_ptr<InferenceModel>> models_;
+    Model& AddModel(std::unique_ptr<Model> model);
+    void BindModel(Model& model, const ModelDescriptor& descriptor);
+
+private:
+
+    std::vector<std::unique_ptr<Model>> models_;
+
+    PerceptionState state_;
 };
 
 } // namespace vp

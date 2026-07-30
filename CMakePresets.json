@@ -9,27 +9,10 @@
       "name": "base",
       "hidden": true,
       "generator": "Unix Makefiles",
-      "binaryDir": "${sourceDir}/build/${presetName}"
-    },
-    {
-      "name": "unit",
-      "inherits": "base",
+      "binaryDir": "${sourceDir}/build/${presetName}",
       "cacheVariables": {
-        "VP_BUILD_UNIT_TESTS": "ON"
-      }
-    },
-    {
-      "name": "integration",
-      "inherits": "base",
-      "cacheVariables": {
-        "VP_BUILD_INTEGRATION_TESTS": "ON"
-      }
-    },
-    {
-      "name": "all",
-      "inherits": "base",
-      "cacheVariables": {
-        "VP_BUILD_ALL_TESTS": "ON"
+        "VP_ENABLE_OPENCV": "ON",
+        "VP_ENABLE_ONNX": "ON"
       }
     },
     {
@@ -38,34 +21,56 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
       }
+    },
+    {
+      "name": "component",
+      "inherits": "base",
+      "cacheVariables": {
+        "VP_BUILD_COMPONENT_TESTS": "ON"
+      }
+    },
+    {
+      "name": "system",
+      "inherits": "base",
+      "cacheVariables": {
+        "VP_BUILD_SYSTEM_TESTS": "ON"
+      }
+    },
+    {
+      "name": "all",
+      "inherits": "base",
+      "cacheVariables": {
+        "VP_BUILD_COMPONENT_TESTS": "ON",
+        "VP_BUILD_SYSTEM_TESTS": "ON"
+      }
     }
   ],
   "buildPresets": [
     {
-      "name": "unit",
-      "configurePreset": "unit"
+      "name": "release",
+      "configurePreset": "release"
     },
     {
-      "name": "integration",
-      "configurePreset": "integration"
+      "name": "component",
+      "configurePreset": "component"
+    },
+    {
+      "name": "system",
+      "configurePreset": "system"
     },
     {
       "name": "all",
       "configurePreset": "all"
-    },
-    {
-      "name": "release",
-      "configurePreset": "release"
     }
   ],
   "testPresets": [
     {
-      "name": "unit",
-      "configurePreset": "unit"
+      "name": "component",
+      "configurePreset": "component"
     },
     {
-      "name": "integration",
-      "configurePreset": "integration"
+      "name": "system",
+      "configurePreset": "system"
     },
     {
       "name": "all",
