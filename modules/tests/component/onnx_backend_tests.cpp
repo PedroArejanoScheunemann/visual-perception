@@ -10,8 +10,7 @@ namespace
 {
 
 const std::filesystem::path kModelPath =
-    std::filesystem::path(VP_ASSETS_DIR) /
-    "weights" /
+    std::filesystem::path(VP_WEIGHTS_DIR) /
     "object" /
     "yolo11n.onnx";
 

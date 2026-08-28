@@ -14,7 +14,7 @@ namespace
 TEST(ObjectDetectionSystemTest, DetectsPerson)
 {
     const std::filesystem::path image_path =
-    std::filesystem::path(VP_IMAGES_DIR) / "3_pessoas.jpeg";
+    std::filesystem::path(VP_IMAGES_DIR) / "3_people.jpeg";
 
     const cv::Mat image = cv::imread(image_path.string(), cv::IMREAD_COLOR);
 
@@ -69,12 +69,7 @@ TEST(ObjectDetectionSystemTest, DetectsPerson)
     const std::filesystem::path output_path =
     image_path.parent_path() / (image_path.stem().string() + "_detections" + image_path.extension().string());
 
-    ASSERT_TRUE(
-        cv::imwrite(
-            output_path.string(),
-            result));
-
-
+    ASSERT_TRUE(cv::imwrite(output_path.string(), result));
 }
 
 } // namespace

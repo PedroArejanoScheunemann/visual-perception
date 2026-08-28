@@ -6,9 +6,10 @@
 namespace vp
 {
 
-Yolo11Decoder::Yolo11Decoder(Tensor& output) :
+Yolo11Decoder::Yolo11Decoder(Tensor& output, const ImageTransform& transform) :
                              output_(output),
-                             bound_detections_(&detections_)
+                             bound_detections_(&detections_),
+                             transform_(transform)
 {
     ValidateOutput();
 }
@@ -18,11 +19,11 @@ void Yolo11Decoder::Bind(ObjectDetections& detections)
     bound_detections_ = &detections;
 }
 
-void Yolo11Decoder::Process(const ImageTransform& transform)
+void Yolo11Decoder::Process()
 {
     bound_detections_->Clear();
 
-    Decode(transform);
+    Decode();
 
     bound_detections_->ApplyNMS(kNMSThreshold);
 }
@@ -57,7 +58,7 @@ void Yolo11Decoder::ValidateOutput() const
     }
 }
 
-void Yolo11Decoder::Decode(const ImageTransform& transform)
+void Yolo11Decoder::Decode()
 {
     const std::size_t candidate_count = output_.Specification().Dimension(2);
     const float* data = static_cast<const float*>(output_.Data());
@@ -95,7 +96,7 @@ void Yolo11Decoder::Decode(const ImageTransform& transform)
                                       .height = height };
 
         ObjectDetection detection;
-        detection.bounding_box = transform.ToOriginal(model_box);
+        detection.bounding_box = transform_.ToOriginal(model_box);
         detection.confidence = confidence;
 
         bound_detections_->Add(detection);

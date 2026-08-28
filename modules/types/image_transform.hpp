@@ -25,6 +25,15 @@ public:
     ImageTransform(float scale, float padding_x, float padding_y);
 
     /**
+     * @brief Updates the transformation parameters.
+     *
+     * @param scale Scale applied to the original image.
+     * @param padding_x Horizontal padding introduced by the transformation.
+     * @param padding_y Vertical padding introduced by the transformation.
+     */
+    void Update(float scale, float padding_x, float padding_y);
+
+    /**
      * @brief Converts a bounding box from model coordinates to original
      * image coordinates.
      *

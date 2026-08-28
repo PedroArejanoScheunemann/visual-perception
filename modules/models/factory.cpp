@@ -7,7 +7,6 @@
 
 namespace vp
 {
-
 std::unique_ptr<Model> ModelFactory::Create(const ModelDescriptor& descriptor)
 {
     const std::filesystem::path model_path = ResolveModelPath(descriptor);
@@ -16,7 +15,6 @@ std::unique_ptr<Model> ModelFactory::Create(const ModelDescriptor& descriptor)
 
     return CreateModel(descriptor.model, std::move(backend));
 }
-
 
 std::filesystem::path ModelFactory::ResolveModelPath(const ModelDescriptor& descriptor)
 {
@@ -73,6 +71,5 @@ std::unique_ptr<Model> ModelFactory::CreateModel(ModelType model_type, std::uniq
 
     throw std::runtime_error("Unsupported inference model.");
 }
-
 
 } // namespace vp

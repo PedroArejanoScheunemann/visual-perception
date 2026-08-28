@@ -24,7 +24,6 @@ Model& Engine::AddModel(const ModelDescriptor& descriptor)
     return AddModel(std::move(model));
 }
 
-
 void Engine::BindModel(Model& model, const ModelDescriptor& descriptor)
 {
     switch (descriptor.category)
@@ -54,6 +53,8 @@ void Engine::ClearModels()
 
 void Engine::Process(const Frame& frame)
 {
+    VP_PROFILE_SCOPE(ProfileOperation::Pipeline);
+
     state_.Clear();
 
     for (const auto& model : models_)
@@ -66,5 +67,22 @@ const ObjectDetections& Engine::Detections() const
 {
     return state_.Detections();
 }
+
+#ifdef VP_ENABLE_PROFILING
+void Engine::ResetProfiling()
+{
+    Profiler::Get().Reset();
+}
+
+const ProfileResults& Engine::GetProfileResults() const
+{
+    return Profiler::Get().GetResults();
+}
+
+void Engine::WriteProfileReport(std::ostream& stream) const
+{
+    Profiler::Get().WriteReport(stream);
+}
+#endif
 
 } // namespace vp

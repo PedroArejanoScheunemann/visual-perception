@@ -110,7 +110,7 @@ private:
         kCategoryNames{
             "object",
             "face",
-            "surfboard"
+            "surferboard"
         };
 
     inline static constexpr std::array<std::string_view,

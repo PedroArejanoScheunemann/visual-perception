@@ -4,9 +4,10 @@ target_sources(vp_component_tests PRIVATE engine_tests.cpp
                                           factory_tests.cpp
                                           onnx_backend_tests.cpp)
 
-target_compile_definitions(vp_component_tests PRIVATE VP_ASSETS_DIR="${PROJECT_SOURCE_DIR}/assets")
+target_compile_definitions(vp_component_tests PRIVATE VP_WEIGHTS_DIR="${PROJECT_SOURCE_DIR}/assets/weights")
 
 target_link_libraries(vp_component_tests PRIVATE VP::Engine
+                                                 VP::Types::OpenCV
                                                  GTest::gtest
                                                  GTest::gtest_main)
 

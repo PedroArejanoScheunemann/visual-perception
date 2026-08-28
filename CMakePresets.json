@@ -37,11 +37,19 @@
       }
     },
     {
-      "name": "all",
+      "name": "test-all",
       "inherits": "base",
       "cacheVariables": {
         "VP_BUILD_COMPONENT_TESTS": "ON",
         "VP_BUILD_SYSTEM_TESTS": "ON"
+      }
+    },
+    {
+      "name": "benchmark",
+      "inherits": "release",
+      "cacheVariables": {
+        "VP_BUILD_BENCHMARKS": "ON",
+        "VP_ENABLE_PROFILING": "ON"
       }
     }
   ],
@@ -59,8 +67,12 @@
       "configurePreset": "system"
     },
     {
-      "name": "all",
-      "configurePreset": "all"
+      "name": "test-all",
+      "configurePreset": "test-all"
+    },
+    {
+      "name": "benchmark",
+      "configurePreset": "benchmark"
     }
   ],
   "testPresets": [
@@ -73,8 +85,12 @@
       "configurePreset": "system"
     },
     {
-      "name": "all",
-      "configurePreset": "all"
+      "name": "test-all",
+      "configurePreset": "test-all"
+    },
+    {
+      "name": "benchmark",
+      "configurePreset": "benchmark"
     }
   ]
 }

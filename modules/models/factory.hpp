@@ -6,6 +6,7 @@
 #include "model.hpp"
 #include "descriptor.hpp"
 #include "backend.hpp"
+#include "profiler_macros.hpp"
 
 namespace vp
 {

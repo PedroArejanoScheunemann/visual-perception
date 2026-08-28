@@ -192,7 +192,7 @@ void Yolo11Preprocessor::ValidateInput() const
     }
 }
 
-ImageTransform Yolo11Preprocessor::Process(const Frame& frame) const
+void Yolo11Preprocessor::Process(const Frame& frame)
 {
     const TensorSpecification& specification = input_.Specification();
     const int target_height = static_cast<int>(specification.Dimension(2));
@@ -216,7 +216,12 @@ ImageTransform Yolo11Preprocessor::Process(const Frame& frame) const
 
     ConvertHwcToChw(letterboxed, destination);
 
-    return ImageTransform(scale, padding_x, padding_y);
+    transform_.Update(scale, padding_x, padding_y);
+}
+
+const ImageTransform& Yolo11Preprocessor::Transform() const
+{
+    return transform_;
 }
 
 } // namespace vp

@@ -10,6 +10,7 @@ target_include_directories(vp_models PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(vp_models PUBLIC VP::Backend
                                        VP::Perception
+                                       VP::Profiling
                                        VP::Types::OpenCV)
 
 add_subdirectory(object)

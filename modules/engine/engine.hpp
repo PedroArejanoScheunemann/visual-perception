@@ -2,12 +2,12 @@
 
 #include <memory>
 #include <vector>
-
 #include "frame.hpp"
 #include "model.hpp"
 #include "descriptor.hpp"
 #include "object_detections.hpp"
 #include "perception_state.hpp"
+#include "profiler_macros.hpp"
 
 namespace vp
 {
@@ -66,6 +66,27 @@ public:
      * @return Object detections.
      */
     const ObjectDetections& Detections() const;
+
+#ifdef VP_ENABLE_PROFILING
+    /**
+     * @brief Clears all profiling measurements.
+     */
+    void ResetProfiling();
+
+    /**
+     * @brief Returns the profiling results for all operations.
+     *
+     * @return Constant reference to the profiling results.
+     */
+    const ProfileResults& GetProfileResults() const;
+
+    /**
+     * @brief Writes the profiling results to a text stream.
+     *
+     * @param stream Output stream.
+     */
+    void WriteProfileReport(std::ostream& stream) const;
+#endif
 
 private:
 

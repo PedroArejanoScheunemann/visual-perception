@@ -28,10 +28,18 @@ public:
      * normalized to the [0, 1] range and converted from HWC to CHW layout.
      *
      * @param frame Input image.
-     *
-     * @return Transformation applied to the input image.
      */
-    ImageTransform Process(const Frame& frame) const;
+    void Process(const Frame& frame);
+
+    /**
+     * @brief Returns the image transformation.
+     *
+     * The returned reference remains valid for the lifetime of the
+     * preprocessor.
+     *
+     * @return Constant reference to the internal image transformation.
+     */
+    const ImageTransform& Transform() const;
 
 private:
 
@@ -40,6 +48,8 @@ private:
 private:
 
     Tensor& input_;
+
+    ImageTransform transform_{1.0F, 0.0F, 0.0F};
 };
 
 } // namespace vp

@@ -30,20 +30,22 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # Build Options
 # ============================================================================
 
-option(VP_BUILD_COMPONENT_TESTS "Build component tests"       OFF)
-option(VP_BUILD_SYSTEM_TESTS    "Build system tests"          OFF)
+option(VP_BUILD_COMPONENT_TESTS "Build component tests"        OFF)
+option(VP_BUILD_SYSTEM_TESTS    "Build system tests"           OFF)
 
-option(VP_BUILD_EXAMPLES        "Build examples"              OFF)
+option(VP_BUILD_EXAMPLES        "Build examples"               OFF)
 
-option(VP_ENABLE_ONNX           "Enable ONNX Runtime backend" OFF)
+option(VP_BUILD_BENCHMARKS      "Build performance benchmarks" OFF)
 
-option(VP_ENABLE_OPENCV         "Enable OpenCV support"       OFF)
+option(VP_ENABLE_ONNX           "Enable ONNX Runtime backend"  OFF)
+
+option(VP_ENABLE_OPENCV         "Enable OpenCV support"        OFF)
 
 # ============================================================================
 # Testing
 # ============================================================================
 
-if(VP_BUILD_COMPONENT_TESTS OR VP_BUILD_SYSTEM_TESTS)
+if(VP_BUILD_COMPONENT_TESTS OR VP_BUILD_SYSTEM_TESTS OR VP_BUILD_BENCHMARKS)
     enable_testing()
     include(cmake/dependencies/GoogleTest.cmake)
 endif()

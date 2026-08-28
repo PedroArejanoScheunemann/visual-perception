@@ -17,6 +17,13 @@ ImageTransform::ImageTransform(float scale, float padding_x, float padding_y) :
     }
 }
 
+void ImageTransform::Update(float scale, float padding_x, float padding_y)
+{
+    scale_ = scale;
+    padding_x_ = padding_x;
+    padding_y_ = padding_y;
+}
+
 BoundingBox ImageTransform::ToOriginal(const BoundingBox& box) const
 {
     BoundingBox result;

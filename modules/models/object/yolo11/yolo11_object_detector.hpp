@@ -16,7 +16,6 @@ namespace vp
 class Yolo11ObjectDetector final : public ObjectDetectionModel
 {
 public:
-
     /**
      * @brief Constructs a YOLO11 object detector.
      *
