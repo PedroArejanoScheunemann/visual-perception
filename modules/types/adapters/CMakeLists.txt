@@ -1,3 +1,5 @@
-if(VP_BUILD_OPENCV_ADAPTER)
+if(VP_ENABLE_OPENCV)
+    include(${PROJECT_SOURCE_DIR}/cmake/dependencies/OpenCV.cmake)
+
     add_subdirectory(opencv)
 endif()

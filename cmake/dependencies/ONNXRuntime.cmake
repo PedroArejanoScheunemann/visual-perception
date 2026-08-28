@@ -1,3 +1,7 @@
+if(TARGET ThirdParty::ONNXRuntime)
+    return()
+endif()
+
 include(FetchContent)
 
 set(ONNXRUNTIME_VERSION "1.23.0")

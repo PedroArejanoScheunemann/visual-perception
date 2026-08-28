@@ -30,13 +30,14 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # Build Options
 # ============================================================================
 
-option(VP_BUILD_COMPONENT_TESTS "Build component tests" OFF)
-option(VP_BUILD_SYSTEM_TESTS    "Build system tests"      OFF)
+option(VP_BUILD_COMPONENT_TESTS "Build component tests"       OFF)
+option(VP_BUILD_SYSTEM_TESTS    "Build system tests"          OFF)
 
-option(VP_BUILD_EXAMPLES        "Build examples"          OFF)
+option(VP_BUILD_EXAMPLES        "Build examples"              OFF)
 
 option(VP_ENABLE_ONNX           "Enable ONNX Runtime backend" OFF)
-option(VP_ENABLE_OPENCV         "Enable OpenCV adapter"       OFF)
+
+option(VP_ENABLE_OPENCV         "Enable OpenCV support"       OFF)
 
 # ============================================================================
 # Testing

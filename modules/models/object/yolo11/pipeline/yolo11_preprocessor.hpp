@@ -1,7 +1,7 @@
 #pragma once
 
-#include <cstddef>
 #include "tensor.hpp"
+#include "image_transform.hpp"
 #include "frame.hpp"
 
 namespace vp
@@ -17,20 +17,29 @@ public:
     /**
      * @brief Constructs a YOLO11 preprocessor.
      *
-     * @param inputs Input tensors.
+     * @param input Input tensor.
      */
-    explicit Yolo11Preprocessor(std::vector<Tensor>& inputs);
+    explicit Yolo11Preprocessor(Tensor& input);
 
     /**
      * @brief Preprocesses an image.
      *
+     * The image is resized using letterbox, converted from BGR to RGB,
+     * normalized to the [0, 1] range and converted from HWC to CHW layout.
+     *
      * @param frame Input image.
+     *
+     * @return Transformation applied to the input image.
      */
-    void Process(const Frame& frame) const;
+    ImageTransform Process(const Frame& frame) const;
 
 private:
 
-    std::vector<Tensor>& inputs_;
+    void ValidateInput() const;
+
+private:
+
+    Tensor& input_;
 };
 
 } // namespace vp

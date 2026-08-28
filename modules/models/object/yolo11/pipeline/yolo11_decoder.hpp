@@ -2,6 +2,7 @@
 
 #include <vector>
 
+#include "image_transform.hpp"
 #include "object_detections.hpp"
 #include "tensor.hpp"
 
@@ -9,7 +10,7 @@ namespace vp
 {
 
 /**
- * @brief Decodes the output tensor of a YOLO11 model.
+ * @brief Decodes YOLO11 object detection outputs.
  */
 class Yolo11Decoder
 {
@@ -18,9 +19,9 @@ public:
     /**
      * @brief Constructs a YOLO11 decoder.
      *
-     * @param outputs Output tensors.
+     * @param output Output tensor produced by the inference backend.
      */
-    explicit Yolo11Decoder(std::vector<Tensor>& outputs);
+    explicit Yolo11Decoder(Tensor& output);
 
     /**
      * @brief Binds the destination where decoded detections are stored.
@@ -33,23 +34,39 @@ public:
     void Bind(ObjectDetections& detections);
 
     /**
-     * @brief Decodes the output tensor.
+     * @brief Decodes the model output.
+     *
+     * @param transform Transformation applied during preprocessing.
      */
-    void Process();
+    void Process(const ImageTransform& transform);
 
     /**
-     * @brief Returns the decoded object detections.
+     * @brief Returns the decoded detections.
      *
-     * Returns either the internally stored detections or the bound destination,
-     * depending on whether Bind() has been called.
+     * Bounding boxes are returned in the coordinate system of the original input frame.
      *
-     * @return Object detections.
+     * @return Decoded object detections.
      */
     const ObjectDetections& Detections() const;
 
 private:
 
-    std::vector<Tensor>& outputs_;
+    static constexpr std::size_t kBoxValues = 4;
+    static constexpr std::size_t kClassCount = 80;
+    static constexpr std::size_t kPersonClass = 0;
+
+    static constexpr float kConfidenceThreshold = 0.25F;
+    static constexpr float kNMSThreshold = 0.45F;
+
+    void ValidateOutput() const;
+
+    void Decode(const ImageTransform& transform);
+
+    static float IoU(const BoundingBox& first, const BoundingBox& second);
+
+private:
+
+    Tensor& output_;
 
     ObjectDetections detections_;
 
